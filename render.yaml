@@ -1,20 +1,14 @@
 services:
   - type: web
     name: pos-backend
-    env: python
-    plan: free
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn core.wsgi:application"
+    # ... (rest of web service config)
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: pos-database
+          name: my-old-database # <-- Change this name
           property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
-      - key: WEB_CONCURRENCY
-        value: 4
+      # ... (rest of env vars)
 
 databases:
-  - name: pos-database
+  - name: my-old-database # <-- And change this name
     plan: free
