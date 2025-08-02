@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: pos-backend
+    env: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn core.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: pos-database
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+
+  - type: psql
+    name: pos-database
+    plan: free
+    ipAllowList: []
