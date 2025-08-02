@@ -17,4 +17,4 @@ services:
 
 databases:
   - name: pos-database
-    plan: hobby
+    plan: free
