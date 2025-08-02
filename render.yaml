@@ -15,7 +15,8 @@ services:
       - key: WEB_CONCURRENCY
         value: 4
 
-  - type: psql
+#...
+  - type: postgres
     name: pos-database
     plan: free
     ipAllowList: []
