@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>แพ็กเกจการใช้งาน</h2>
+{% if shop.plan_expiry %}
+<p>วันหมดอายุ: <strong>{{ shop.plan_expiry }}</strong></p>
+{% endif %}
+<form method="post">
+  <div class="grid">
+    <div class="card">
+      <h3>รายเดือน 299 ฿</h3>
+      <input type="hidden" name="plan_code" value="MONTHLY">
+      <button class="btn">เลือก</button>
+    </div>
+    <div class="card">
+      <h3>รายปี 2,990 ฿</h3>
+      <input type="hidden" name="plan_code" value="ANNUAL">
+      <button class="btn">เลือก</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

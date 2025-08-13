@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>ชำระค่าแพ็กเกจ</h2>
+<p>สแกนเพื่อชำระ {{ "%.2f"|format(sub.price) }} ฿</p>
+<img src="{{ qr_png.decode() }}" style="max-width:280px">
+<form method="post" action="{{ url_for('set_subscription_paid', sub_id=sub.id) }}">
+  <button class="btn">ทำเครื่องหมายชำระแล้ว</button>
+</form>
+{% endblock %}

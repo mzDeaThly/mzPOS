@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title or 'Universal POS' }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<header>
+  <h1>Universal POS</h1>
+  <nav>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('tables') }}">โต๊ะ</a>
+    <a href="{{ url_for('menu') }}">เมนู</a>
+    <a href="{{ url_for('inventory') }}">สต็อก</a>
+    <a href="{{ url_for('members') }}">สมาชิก</a>
+    <a href="{{ url_for('reports') }}">รายงาน</a>
+    <a href="{{ url_for('subscriptions') }}">แพ็กเกจ</a>
+    <a href="{{ url_for('settings') }}">ตั้งค่า</a>
+    <a href="{{ url_for('logout') }}">ออกจากระบบ</a>
+    {% else %}
+    <a href="{{ url_for('login') }}">เข้าสู่ระบบ</a>
+    <a href="{{ url_for('register') }}">สมัคร + สร้างร้าน</a>
+    {% endif %}
+  </nav>
+</header>
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flash">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer><small>© 2025 Universal POS</small></footer>
+</body>
+</html>

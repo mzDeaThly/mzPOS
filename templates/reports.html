@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>รายงานยอดขาย</h2>
+<div class="cards">
+  <div class="card"><h3>รวมทั้งหมด</h3><p>{{ "%.2f"|format(total) }} ฿</p></div>
+  <div class="card"><h3>วันนี้</h3><p>{{ "%.2f"|format(daily) }} ฿</p></div>
+  <div class="card"><h3>7 วัน</h3><p>{{ "%.2f"|format(weekly) }} ฿</p></div>
+  <div class="card"><h3>เดือนนี้</h3><p>{{ "%.2f"|format(monthly) }} ฿</p></div>
+</div>
+{% endblock %}

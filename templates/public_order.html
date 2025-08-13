@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ shop.name }} — โต๊ะ {{ table.name }}</h2>
+
+<div class="cats-nav">
+  {% for c in categories %}
+    <a href="#cat-{{ c.id }}" class="chip">{{ c.name }}</a>
+  {% endfor %}
+</div>
+
+<div class="flex">
+  <div class="menu-grid">
+    {% for c in categories %}
+      <h3 id="cat-{{ c.id }}">{{ c.name }}</h3>
+      <div class="menu-cards">
+        {% for it in items_by_cat.get(c.id, []) %}
+          <div class="menu-card">
+            <div class="pic">
+              {% if it.image_url %}
+                <img src="{{ it.image_url }}" alt="{{ it.name }}">
+              {% else %}
+                <div class="noimg">ไม่มีรูป</div>
+              {% endif %}
+            </div>
+            <div class="info">
+              <div class="title">{{ it.name }}</div>
+              <div class="price">{{ "%.2f"|format(it.price) }} ฿</div>
+              <form method="post" class="add">
+                <input type="hidden" name="item_id" value="{{ it.id }}">
+                <input type="number" name="qty" value="1" min="1">
+                <button class="btn">เพิ่ม</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="bill">
+    <h3>ตะกร้าของคุณ</h3>
+    {% if cart_items|length == 0 %}
+      <p>ยังไม่มีรายการ</p>
+    {% else %}
+    <table>
+      <tr><th>เมนู</th><th>จำนวน</th><th>รวม</th><th></th></tr>
+      {% for c in cart_items %}
+      <tr>
+        <td>{{ c.name }}</td>
+        <td>{{ c.qty }}</td>
+        <td>{{ "%.2f"|format(c.subtotal) }}</td>
+        <td><a class="btn danger" href="{{ url_for('public_remove', token=table.token, item_id=c.id) }}">ลบ</a></td>
+      </tr>
+      {% endfor %}
+      <tr><th colspan="2">รวมทั้งหมด</th><th>{{ "%.2f"|format(total) }} ฿</th><th></th></tr>
+    </table>
+    <form method="post" action="{{ url_for('public_checkout', token=table.token) }}">
+      <button class="btn">ส่งออเดอร์เข้าครัว</button>
+    </form>
+    {% endif %}
+    <p style="color:#94a3b8">* ชำระเงินกับพนักงานเมื่อรับประทานเสร็จ — รองรับ PromptPay/เงินสด</p>
+  </div>
+</div>
+{% endblock %}

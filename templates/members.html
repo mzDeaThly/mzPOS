@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>สมาชิก/แต้ม</h2>
+<form method="post">
+  <label>ชื่อ <input name="name" required></label>
+  <label>เบอร์โทร <input name="phone" required></label>
+  <button class="btn">เพิ่มสมาชิก</button>
+</form>
+<table>
+<tr><th>ชื่อ</th><th>โทร</th><th>แต้ม</th></tr>
+{% for m in members %}
+<tr><td>{{ m.name }}</td><td>{{ m.phone }}</td><td>{{ m.points }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>สมัครสมาชิก + สร้างร้าน</h2>
+<form method="post">
+  <label>อีเมล <input name="email" required></label>
+  <label>รหัสผ่าน <input type="password" name="password" required></label>
+  <label>ชื่อร้าน <input name="shop_name" required></label>
+  <button class="btn">สมัคร</button>
+</form>
+{% endblock %}

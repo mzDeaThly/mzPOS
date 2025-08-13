@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>หน้าครัว</h2>
+<div class="grid">
+{% for o in orders %}
+  <div class="card">
+    <h3>โต๊ะ {{ o.table_id }} — ออเดอร์ #{{ o.id }}</h3>
+    <ul>
+      {% for it in o.items %}
+        <li>{{ it.quantity }} × {{ it.menu_item.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

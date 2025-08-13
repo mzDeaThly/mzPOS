@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>โต๊ะ</h2>
+<form method="post">
+  <label>ชื่อโต๊ะ/หมายเลข <input name="name" required></label>
+  <button class="btn">เพิ่มโต๊ะ</button>
+</form>
+<div class="grid">
+{% for t in tables %}
+  <div class="table {{ t.status|lower }}">
+    <div class="name">{{ t.name }}</div>
+    <div class="status">{{ t.status }}</div>
+    <a class="btn" href="{{ url_for('new_order', table_id=t.id) }}">สั่งอาหาร (พนักงาน)</a>
+    <a class="btn" href="{{ url_for('table_qr', table_id=t.id) }}">QR ลูกค้า</a>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

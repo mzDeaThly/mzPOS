@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>ตั้งค่าร้าน</h2>
+<form method="post">
+  <label>ชื่อร้าน <input name="name" value="{{ shop.name }}" required></label>
+  <label>PromptPay ID (เบอร์/เลขบัตร) <input name="promptpay_id" value="{{ shop.promptpay_id or '' }}"></label>
+  <label>ชนิด PromptPay 
+    <select name="promptpay_kind">
+      <option value="PHONE" {{'selected' if shop.promptpay_kind=='PHONE' else ''}}>เบอร์โทร</option>
+      <option value="NATIONAL_ID" {{'selected' if shop.promptpay_kind=='NATIONAL_ID' else ''}}>เลขบัตร</option>
+    </select>
+  </label>
+  <label>เรตคะแนน (ทุก X บาท = 1 แต้ม) <input name="point_rate" value="{{ shop.point_rate }}"></label>
+  <button class="btn">บันทึก</button>
+</form>
+{% endblock %}

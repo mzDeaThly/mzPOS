@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>ปิดบิล #{{ order.id }}</h2>
+<p>รวม: <strong>{{ "%.2f"|format(order.total_amount) }} ฿</strong></p>
+<form method="post">
+  <label>เบอร์โทรสมาชิก (ถ้ามี) <input name="member_phone" placeholder="เช่น 0812345678"></label>
+  <label>วิธีชำระ
+    <select name="method">
+      <option value="CASH">เงินสด</option>
+      <option value="PROMPTPAY">PromptPay</option>
+    </select>
+  </label>
+  <button class="btn">ชำระเงิน</button>
+</form>
+{% endblock %}

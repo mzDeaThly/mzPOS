@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>สูตร: {{ item.name }}</h2>
+<form method="post">
+  <label>วัตถุดิบ
+    <select name="ingredient_id">
+      {% for i in ings %}<option value="{{ i.id }}">{{ i.name }} ({{ i.unit }})</option>{% endfor %}
+    </select>
+  </label>
+  <label>ปริมาณต่อ 1 ที่ <input type="number" step="0.01" name="quantity" required></label>
+  <button class="btn">เพิ่ม</button>
+</form>
+<table>
+<tr><th>วัตถุดิบ</th><th>ปริมาณ</th></tr>
+{% for r, ing in recs %}
+<tr><td>{{ ing.name }}</td><td>{{ r.quantity }} {{ ing.unit }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}
